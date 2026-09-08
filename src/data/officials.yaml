@@ -1,0 +1,155 @@
+# The roster shown to the player, one entry at a time.
+#
+# Edit freely: add/remove people, fix titles, swap photos. Each `photo` path is
+# resolved against /public (so "officials/foo.jpg" -> public/officials/foo.jpg).
+# `source` / `license` are for attribution only and are not shown in-game.
+#
+# Portraits here are official U.S. government portraits, which are in the public
+# domain as works of the federal government. See ATTRIBUTIONS.md.
+
+- id: donald-trump
+  name: Donald Trump
+  position: President of the United States
+  photo: officials/donald-trump.jpg
+  source: https://commons.wikimedia.org/wiki/File:Donald_Trump_official_portrait_(cropped).jpg
+  license: Public domain (U.S. Government work)
+
+- id: jd-vance
+  name: J.D. Vance
+  position: Vice President of the United States
+  photo: officials/jd-vance.jpg
+  source: https://commons.wikimedia.org/wiki/File:JD_Vance_Vice_Presidential_Portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: marco-rubio
+  name: Marco Rubio
+  position: U.S. Secretary of State
+  photo: officials/marco-rubio.jpg
+  source: https://commons.wikimedia.org/wiki/File:Marco_Rubio_official_photo.jpg
+  license: Public domain (U.S. Government work)
+
+- id: pete-hegseth
+  name: Pete Hegseth
+  position: U.S. Secretary of Defense
+  photo: officials/pete-hegseth.jpg
+  source: https://commons.wikimedia.org/wiki/File:Pete_Hegseth_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: pam-bondi
+  name: Pam Bondi
+  position: U.S. Attorney General
+  photo: officials/pam-bondi.jpg
+  source: https://commons.wikimedia.org/wiki/File:Pam_Bondi_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: kristi-noem
+  name: Kristi Noem
+  position: U.S. Secretary of Homeland Security
+  photo: officials/kristi-noem.jpg
+  source: https://commons.wikimedia.org/wiki/File:Kristi_Noem_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: robert-f-kennedy-jr
+  name: Robert F. Kennedy Jr.
+  position: U.S. Secretary of Health and Human Services
+  photo: officials/robert-f-kennedy-jr.jpg
+  source: https://commons.wikimedia.org/wiki/File:Robert_F._Kennedy_Jr._official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: scott-bessent
+  name: Scott Bessent
+  position: U.S. Secretary of the Treasury
+  photo: officials/scott-bessent.jpg
+  source: https://commons.wikimedia.org/wiki/File:Scott_Bessent_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: tulsi-gabbard
+  name: Tulsi Gabbard
+  position: Director of National Intelligence
+  photo: officials/tulsi-gabbard.jpg
+  source: https://commons.wikimedia.org/wiki/File:Tulsi_Gabbard_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: kash-patel
+  name: Kash Patel
+  position: Director of the Federal Bureau of Investigation
+  photo: officials/kash-patel.jpg
+  source: https://commons.wikimedia.org/wiki/File:Kash_Patel_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: russell-vought
+  name: Russell Vought
+  position: Director of the Office of Management and Budget
+  photo: officials/russell-vought.jpg
+  source: https://commons.wikimedia.org/wiki/File:Russell_Vought_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: stephen-miller
+  name: Stephen Miller
+  position: White House Deputy Chief of Staff for Policy
+  photo: officials/stephen-miller.jpg
+  source: https://commons.wikimedia.org/wiki/File:Stephen_Miller_2025.jpg
+  license: Public domain (U.S. Government work)
+
+- id: susie-wiles
+  name: Susie Wiles
+  position: White House Chief of Staff
+  photo: officials/susie-wiles.jpg
+  source: https://commons.wikimedia.org/wiki/File:Susie_Wiles_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: tom-homan
+  name: Tom Homan
+  position: White House Border Czar
+  photo: officials/tom-homan.jpg
+  source: https://commons.wikimedia.org/wiki/File:Thomas_Homan_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: linda-mcmahon
+  name: Linda McMahon
+  position: U.S. Secretary of Education
+  photo: officials/linda-mcmahon.jpg
+  source: https://commons.wikimedia.org/wiki/File:Linda_McMahon_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: mike-johnson
+  name: Mike Johnson
+  position: Speaker of the U.S. House of Representatives
+  photo: officials/mike-johnson.jpg
+  source: https://commons.wikimedia.org/wiki/File:Mike_Johnson_117th_Congress_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: john-thune
+  name: John Thune
+  position: U.S. Senate Majority Leader
+  photo: officials/john-thune.jpg
+  source: https://commons.wikimedia.org/wiki/File:John_Thune_official_Senate_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: ted-cruz
+  name: Ted Cruz
+  position: U.S. Senator from Texas
+  photo: officials/ted-cruz.jpg
+  source: https://commons.wikimedia.org/wiki/File:Ted_Cruz_official_113th_Congress_photo.jpg
+  license: Public domain (U.S. Government work)
+
+- id: josh-hawley
+  name: Josh Hawley
+  position: U.S. Senator from Missouri
+  photo: officials/josh-hawley.jpg
+  source: https://commons.wikimedia.org/wiki/File:Josh_Hawley,_official_portrait,_116th_Congress.jpg
+  license: Public domain (U.S. Government work)
+
+- id: lindsey-graham
+  name: Lindsey Graham
+  position: U.S. Senator from South Carolina
+  photo: officials/lindsey-graham.jpg
+  source: https://commons.wikimedia.org/wiki/File:Lindsey_Graham_official_Senate_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: marjorie-taylor-greene
+  name: Marjorie Taylor Greene
+  position: U.S. Representative from Georgia
+  photo: officials/marjorie-taylor-greene.jpg
+  source: https://commons.wikimedia.org/wiki/File:Marjorie_Taylor_Greene_117th_Congress_portrait.jpg
+  license: Public domain (U.S. Government work)
