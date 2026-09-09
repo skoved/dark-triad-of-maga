@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import type { Bary } from '../lib/barycentric';
+import { TRAIT_DEFINITION, type Bary } from '../lib/barycentric';
 import type { Official } from '../data/officials';
 import type { PlacedOfficial } from '../hooks/useGameState';
 import { PersonPrompt } from './PersonPrompt';
@@ -23,28 +23,32 @@ export function PlayScreen({
   const leftPanelRef = useRef<HTMLDivElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
 
+  const defClass = 'text-center text-sm leading-snug text-faint';
+
   return (
-    <div className="flex min-h-dvh flex-col px-4 py-4">
-      <header className="mx-auto w-full max-w-[1800px]">
+    <div className="flex min-h-dvh flex-col px-4 py-3 lg:h-dvh lg:overflow-hidden">
+      <header className="mx-auto w-full max-w-[1800px] shrink-0">
         <span className="font-display text-base uppercase tracking-[0.2em] text-ash">
           The Dark Triad of MAGA
         </span>
       </header>
 
-      <div className="flex flex-1 items-center justify-center">
-        <div className="grid w-full max-w-[1800px] grid-cols-1 items-center justify-items-center gap-6 lg:grid-cols-[minmax(16rem,1fr)_auto_minmax(16rem,1fr)]">
-          <div
-            ref={leftPanelRef}
-            className="order-2 w-full max-w-[26rem] lg:order-1 lg:justify-self-end"
-          >
-            <PersonPrompt official={official} index={index} total={total} />
-          </div>
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-6 py-1 lg:flex-row">
+        <div
+          ref={leftPanelRef}
+          className="order-2 w-full max-w-[26rem] lg:order-1 lg:flex-1"
+        >
+          <PersonPrompt official={official} index={index} total={total} />
+        </div>
 
-          <div className="order-1 aspect-square w-[min(92vw,64dvh)] lg:order-2 lg:w-[min(82dvh,44vw)]">
+        {/* board with each trait's definition glued to the matching edge */}
+        <div className="order-1 flex shrink-0 flex-col items-center gap-1.5 lg:order-2">
+          <p className={`${defClass} max-w-[36rem]`}>{TRAIT_DEFINITION.n}</p>
+
+          <div className="aspect-square w-[min(90vw,58dvh)] lg:w-[min(44vw,calc(100dvh-15rem))]">
             <TriangleBoard
               placed={placed}
               interactive
-              showDefinitions
               avoidLeftRef={leftPanelRef}
               avoidRightRef={rightPanelRef}
               onHoverBary={setHoverBary}
@@ -55,16 +59,21 @@ export function PlayScreen({
             />
           </div>
 
-          <div
-            ref={rightPanelRef}
-            className="order-3 w-full max-w-[26rem] lg:justify-self-start"
-          >
-            <TraitReadout bary={hoverBary} />
+          <div className="grid w-full max-w-[46rem] grid-cols-1 gap-x-10 lg:grid-cols-2">
+            <p className={defClass}>{TRAIT_DEFINITION.m}</p>
+            <p className={defClass}>{TRAIT_DEFINITION.p}</p>
           </div>
+        </div>
+
+        <div
+          ref={rightPanelRef}
+          className="order-3 w-full max-w-[26rem] lg:flex-1"
+        >
+          <TraitReadout bary={hoverBary} />
         </div>
       </div>
 
-      <p className="mt-3 text-center text-sm text-faint">
+      <p className="mt-2 shrink-0 text-center text-sm text-faint">
         Click the triangle to lock in a placement
       </p>
     </div>

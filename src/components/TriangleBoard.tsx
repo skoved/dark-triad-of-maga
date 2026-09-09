@@ -16,7 +16,6 @@ import {
   C,
   CENTROID,
   TRIANGLE_POINTS,
-  TRAIT_DEFINITION,
   fromBarycentric,
   isInside,
   normalizeBary,
@@ -50,7 +49,6 @@ type Props = {
   placed: PlacedOfficial[];
   interactive?: boolean;
   showAllNames?: boolean;
-  showDefinitions?: boolean;
   /** Panels the hover callout must never cover; it dodges above/below them. */
   avoidLeftRef?: RefObject<HTMLElement | null>;
   avoidRightRef?: RefObject<HTMLElement | null>;
@@ -101,7 +99,6 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
     placed,
     interactive = false,
     showAllNames = false,
-    showDefinitions = false,
     avoidLeftRef,
     avoidRightRef,
     onHoverBary,
@@ -472,19 +469,6 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
         </div>
       )}
 
-      {showDefinitions && (
-        <>
-          <p className="pointer-events-none absolute left-1/2 top-[2.5%] w-[38%] -translate-x-1/2 text-center text-sm text-faint">
-            {TRAIT_DEFINITION.n}
-          </p>
-          <p className="pointer-events-none absolute left-[25%] top-[93%] w-[44%] -translate-x-1/2 text-center text-sm text-faint">
-            {TRAIT_DEFINITION.m}
-          </p>
-          <p className="pointer-events-none absolute left-[75%] top-[93%] w-[44%] -translate-x-1/2 text-center text-sm text-faint">
-            {TRAIT_DEFINITION.p}
-          </p>
-        </>
-      )}
     </div>
   );
 });
@@ -530,7 +514,7 @@ function CornerLabel({
 }) {
   const anchor =
     align === 'top' ? 'middle' : align === 'bottom-left' ? 'start' : 'end';
-  const dy = align === 'top' ? -8 : 5.4;
+  const dy = align === 'top' ? -4 : 5.4;
   const dx = align === 'bottom-left' ? -2 : align === 'bottom-right' ? 2 : 0;
   return (
     <text

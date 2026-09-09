@@ -10,10 +10,10 @@ export function PersonPrompt({
   total: number;
 }) {
   return (
-    <div className="w-full rounded-lg border border-white/10 bg-surface/80 p-5">
-      <div className="mb-3 flex items-center justify-between text-xs uppercase tracking-widest text-faint">
-        <span>Place this person</span>
-        <span className="tabular-nums text-ash">
+    <div className="w-full rounded-lg border border-white/10 bg-surface/80 p-4 sm:p-5">
+      <div className="mb-3 flex items-center justify-between gap-2 text-xs uppercase tracking-wide text-faint">
+        <span className="min-w-0 truncate">Place this person</span>
+        <span className="shrink-0 whitespace-nowrap tabular-nums text-ash">
           {index + 1} / {total}
         </span>
       </div>
@@ -22,13 +22,13 @@ export function PersonPrompt({
         <img
           src={photoUrl(official.photo)}
           alt={official.name}
-          className="h-24 w-24 shrink-0 rounded-md border border-white/10 object-cover grayscale-[35%]"
+          className="h-20 w-20 shrink-0 rounded-md border border-white/10 object-cover grayscale-[35%] sm:h-24 sm:w-24"
         />
         <div className="min-w-0">
-          <div className="font-display text-lg leading-tight text-bone">
+          <div className="font-display text-lg leading-tight text-bone break-words">
             {official.name}
           </div>
-          <div className="mt-1 text-sm leading-snug text-ash">
+          <div className="mt-1 break-words text-sm leading-snug text-ash">
             {official.position}
           </div>
         </div>
