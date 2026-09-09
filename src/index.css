@@ -30,6 +30,8 @@
     color-scheme: dark;
     background-color: var(--color-void);
     overflow-x: hidden;
+    /* Scale the whole UI up; caps at 21px around 1920px wide. */
+    font-size: clamp(17px, 0.7rem + 0.8vw, 21px);
   }
 
   body {

@@ -17,7 +17,7 @@ export function TraitReadout({
 
   return (
     <div
-      className={`w-full rounded-lg border border-white/10 bg-surface/80 p-4 transition ${
+      className={`w-full rounded-lg border border-white/10 bg-surface/80 p-5 transition ${
         locked ? 'ring-glow' : ''
       }`}
     >
@@ -25,23 +25,23 @@ export function TraitReadout({
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ash">
           Trait mix
         </span>
-        <span className="text-[10px] uppercase tracking-widest text-faint">
+        <span className="text-xs uppercase tracking-widest text-faint">
           {locked ? 'locked' : bary ? 'at cursor' : 'hover the triangle'}
         </span>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         {ROWS.map((row) => {
           const value = pct ? pct[row.key] : 0;
           return (
             <div key={row.key}>
-              <div className="mb-1 flex items-center justify-between text-xs">
+              <div className="mb-1 flex items-center justify-between text-sm">
                 <span className={`font-medium ${row.color}`}>{row.label}</span>
                 <span className="tabular-nums text-bone">
                   {pct ? `${value}%` : '—'}
                 </span>
               </div>
-              <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+              <div className="h-2.5 overflow-hidden rounded-full bg-white/5">
                 <div
                   className={`h-full rounded-full ${row.bar} transition-[width] duration-150 ease-out`}
                   style={{ width: `${value}%` }}

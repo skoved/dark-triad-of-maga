@@ -5,13 +5,13 @@ export function TitleScreen({ onEnter }: { onEnter: () => void }) {
         A political personality exercise
       </p>
 
-      <h1 className="font-display text-4xl leading-[0.95] tracking-tight text-bone text-glow sm:text-6xl md:text-7xl">
+      <h1 className="font-display text-5xl leading-[0.95] tracking-tight text-bone text-glow sm:text-7xl md:text-8xl">
         The Dark Triad
         <br />
         of MAGA
       </h1>
 
-      <p className="mt-6 max-w-xl text-sm leading-relaxed text-ash sm:text-base">
+      <p className="mt-6 max-w-xl text-base leading-relaxed text-ash sm:text-lg">
         You will be shown Trump-administration officials and Republican
         politicians one at a time. Drop each of them onto the triangle where you
         think they belong between{' '}
@@ -23,7 +23,7 @@ export function TitleScreen({ onEnter }: { onEnter: () => void }) {
       <button
         type="button"
         onClick={onEnter}
-        className="group mt-10 rounded-md border border-blood/60 bg-blood/10 px-8 py-3 font-display text-sm uppercase tracking-[0.2em] text-bone transition hover:bg-blood/20 hover:ring-glow focus:outline-none focus-visible:ring-glow"
+        className="group mt-10 rounded-md border border-blood/60 bg-blood/10 px-10 py-4 font-display text-base uppercase tracking-[0.2em] text-bone transition hover:bg-blood/20 hover:ring-glow focus:outline-none focus-visible:ring-glow"
       >
         Enter
       </button>

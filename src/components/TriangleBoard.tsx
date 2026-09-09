@@ -35,6 +35,9 @@ const COLOR = {
   narc: '#a78bfa',
   mach: '#86b787',
   psych: '#ef6b6b',
+  signBlue: '#002868', // Old Glory Blue
+  signRed: '#bf0a30', // Old Glory Red
+  signInk: '#ffffff',
 } as const;
 
 type Props = {
@@ -137,10 +140,7 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
   const ghostPt = interactive && ghostBary ? fromBarycentric(ghostBary) : null;
 
   return (
-    <div
-      ref={ref}
-      className="relative mx-auto aspect-square w-full max-w-[560px] select-none"
-    >
+    <div ref={ref} className="relative aspect-square w-full select-none">
       <svg
         ref={svgRef}
         viewBox="0 0 100 100"
@@ -154,11 +154,13 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
         onClick={handleClick}
       >
         <defs>
-          <radialGradient id={`fill-${gradId}`} cx="50%" cy="30%" r="75%">
-            <stop offset="0%" stopColor="#2a1119" />
-            <stop offset="55%" stopColor="#170b0e" />
-            <stop offset="100%" stopColor="#0b0608" />
-          </radialGradient>
+          <linearGradient id={`fill-${gradId}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#160d10" />
+            <stop offset="100%" stopColor="#0c0709" />
+          </linearGradient>
+          <clipPath id={`sign-clip-${gradId}`}>
+            <polygon points={TRIANGLE_POINTS} />
+          </clipPath>
           <filter id={`glow-${gradId}`} x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="1.1" result="b" />
             <feMerge>
@@ -168,20 +170,30 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
           </filter>
         </defs>
 
-        <polygon
-          points={TRIANGLE_POINTS}
-          fill={`url(#fill-${gradId})`}
-          stroke={COLOR.blood}
-          strokeWidth={0.7}
-          strokeLinejoin="round"
-          filter={`url(#glow-${gradId})`}
-        />
+        {/* base fill */}
+        <polygon points={TRIANGLE_POINTS} fill={`url(#fill-${gradId})`} />
 
+        {/* faint MAGA yard sign, clipped to the triangle */}
+        <g clipPath={`url(#sign-clip-${gradId})`} opacity={0.18}>
+          <MagaSign />
+        </g>
+
+        {/* barycentric grid, over the sign */}
         <g stroke={COLOR.grid} strokeWidth={0.25}>
           {GRID.map((s, i) => (
             <line key={i} x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2} />
           ))}
         </g>
+
+        {/* glowing crimson edge, on top */}
+        <polygon
+          points={TRIANGLE_POINTS}
+          fill="none"
+          stroke={COLOR.blood}
+          strokeWidth={0.7}
+          strokeLinejoin="round"
+          filter={`url(#glow-${gradId})`}
+        />
 
         {/* placed markers */}
         {placed.map((p) => {
@@ -317,6 +329,34 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
     </div>
   );
 });
+
+/**
+ * A stylised recreation of a classic blue "Make America Great Again" yard sign,
+ * authored in the board's 0–100 viewBox space so it over-covers the triangle and
+ * is cropped by the caller's clip path. Rendered at low opacity as a backdrop.
+ */
+function MagaSign() {
+  const text = {
+    textAnchor: 'middle' as const,
+    fontFamily: "'Archivo Black', Inter, system-ui, sans-serif",
+    fill: COLOR.signInk,
+  };
+  return (
+    <>
+      <rect x={-10} y={0} width={120} height={100} fill={COLOR.signBlue} />
+      <rect x={-10} y={62} width={120} height={3.6} fill={COLOR.signRed} />
+      <text x={50} y={60} fontSize={14} letterSpacing={1.6} {...text}>
+        TRUMP
+      </text>
+      <text x={50} y={74} fontSize={5.5} letterSpacing={1} {...text}>
+        MAKE AMERICA
+      </text>
+      <text x={50} y={81} fontSize={5.5} letterSpacing={1} {...text}>
+        GREAT AGAIN!
+      </text>
+    </>
+  );
+}
 
 function CornerLabel({
   pt,
