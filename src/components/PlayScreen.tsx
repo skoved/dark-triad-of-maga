@@ -39,6 +39,7 @@ export function PlayScreen({
             <TriangleBoard
               placed={placed}
               interactive
+              showDefinitions
               onHoverBary={setHoverBary}
               onPlace={(b) => {
                 onPlace(b);

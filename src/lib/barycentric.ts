@@ -30,6 +30,12 @@ export const TRAIT_LABEL: Record<Trait, string> = {
   p: 'Psychopathy',
 };
 
+export const TRAIT_DEFINITION: Record<Trait, string> = {
+  n: 'Characterized by grandiosity, pride, egotism, and a lack of empathy.',
+  m: 'Characterized by manipulativeness, indifference to morality, lack of empathy, and a calculated focus on self-interest.',
+  p: 'Characterized by continuous antisocial behavior, impulsivity, selfishness, callous and unemotional traits, and remorselessness.',
+};
+
 const DET =
   (B.y - C.y) * (A.x - C.x) + (C.x - B.x) * (A.y - C.y);
 

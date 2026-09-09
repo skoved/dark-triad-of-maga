@@ -12,6 +12,7 @@ import {
   B,
   C,
   TRIANGLE_POINTS,
+  TRAIT_DEFINITION,
   fromBarycentric,
   isInside,
   normalizeBary,
@@ -44,6 +45,7 @@ type Props = {
   placed: PlacedOfficial[];
   interactive?: boolean;
   showAllNames?: boolean;
+  showDefinitions?: boolean;
   onHoverBary?: (b: Bary | null) => void;
   onPlace?: (b: Bary) => void;
 };
@@ -66,7 +68,14 @@ const GRID: Seg[] = GRID_STEPS.flatMap((t) => {
 });
 
 export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function TriangleBoard(
-  { placed, interactive = false, showAllNames = false, onHoverBary, onPlace },
+  {
+    placed,
+    interactive = false,
+    showAllNames = false,
+    showDefinitions = false,
+    onHoverBary,
+    onPlace,
+  },
   ref,
 ) {
   const gradId = useId().replace(/:/g, '');
@@ -326,6 +335,20 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
           </button>
         </div>
       )}
+
+      {showDefinitions && (
+        <>
+          <p className="pointer-events-none absolute left-1/2 top-[2.5%] w-[38%] -translate-x-1/2 text-center text-sm text-faint">
+            {TRAIT_DEFINITION.n}
+          </p>
+          <p className="pointer-events-none absolute left-[25%] top-[93%] w-[44%] -translate-x-1/2 text-center text-sm text-faint">
+            {TRAIT_DEFINITION.m}
+          </p>
+          <p className="pointer-events-none absolute left-[75%] top-[93%] w-[44%] -translate-x-1/2 text-center text-sm text-faint">
+            {TRAIT_DEFINITION.p}
+          </p>
+        </>
+      )}
     </div>
   );
 });
@@ -371,7 +394,7 @@ function CornerLabel({
 }) {
   const anchor =
     align === 'top' ? 'middle' : align === 'bottom-left' ? 'start' : 'end';
-  const dy = align === 'top' ? -3.4 : 5.4;
+  const dy = align === 'top' ? -8 : 5.4;
   const dx = align === 'bottom-left' ? -2 : align === 'bottom-right' ? 2 : 0;
   return (
     <text
