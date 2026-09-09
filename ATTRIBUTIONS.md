@@ -13,6 +13,11 @@ check there for the specific photographer credit and the exact PD tag
 If you swap in a different image, make sure it is public domain or under a
 license that permits reuse, and update `source` / `license` accordingly.
 
+A few entries are officeholders whose only widely-available photo is **not** a
+federal-government work (e.g. a state official or a former member of Congress);
+those are marked `license: See source` in `officials.yaml` — verify the license
+on the linked Commons file page before any public/commercial use.
+
 ## Regenerating the portraits
 
 `scripts/fetch-portraits.mjs` downloads a square thumbnail for every roster entry

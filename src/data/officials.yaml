@@ -37,14 +37,14 @@
 
 - id: pam-bondi
   name: Pam Bondi
-  position: U.S. Attorney General
+  position: Former U.S. Attorney General
   photo: officials/pam-bondi.jpg
   source: https://commons.wikimedia.org/wiki/File:Pam_Bondi_official_portrait.jpg
   license: Public domain (U.S. Government work)
 
 - id: kristi-noem
   name: Kristi Noem
-  position: U.S. Secretary of Homeland Security
+  position: U.S. Special Envoy for the Shield of the Americas / Former U.S. Secretary of Homeland Security
   photo: officials/kristi-noem.jpg
   source: https://commons.wikimedia.org/wiki/File:Kristi_Noem_official_portrait.jpg
   license: Public domain (U.S. Government work)
@@ -65,7 +65,7 @@
 
 - id: tulsi-gabbard
   name: Tulsi Gabbard
-  position: Director of National Intelligence
+  position: Former Director of National Intelligence
   photo: officials/tulsi-gabbard.jpg
   source: https://commons.wikimedia.org/wiki/File:Tulsi_Gabbard_official_portrait.jpg
   license: Public domain (U.S. Government work)
@@ -140,16 +140,135 @@
   source: https://commons.wikimedia.org/wiki/File:Josh_Hawley,_official_portrait,_116th_Congress.jpg
   license: Public domain (U.S. Government work)
 
-- id: lindsey-graham
-  name: Lindsey Graham
+- id: darline-graham
+  name: Darline Graham
   position: U.S. Senator from South Carolina
-  photo: officials/lindsey-graham.jpg
-  source: https://commons.wikimedia.org/wiki/File:Lindsey_Graham_official_Senate_portrait.jpg
+  photo: officials/darline-graham.jpg
+  source: https://commons.wikimedia.org/wiki/File:Darline_Graham_official_Senate_portrait.jpg
   license: Public domain (U.S. Government work)
 
-- id: marjorie-taylor-greene
-  name: Marjorie Taylor Greene
-  position: U.S. Representative from Georgia
-  photo: officials/marjorie-taylor-greene.jpg
-  source: https://commons.wikimedia.org/wiki/File:Marjorie_Taylor_Greene_117th_Congress_portrait.jpg
+- id: howard-lutnick
+  name: Howard Lutnick
+  position: U.S. Secretary of Commerce
+  photo: officials/howard-lutnick.jpg
+  source: https://commons.wikimedia.org/wiki/File:Howard_Lutnick_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: todd-blanche
+  name: Todd Blanche
+  position: U.S. Attorney General
+  photo: officials/todd-blanche.jpg
+  source: https://commons.wikimedia.org/wiki/File:Todd_Blanche_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: jay-clayton
+  name: Jay Clayton
+  position: Director of National Intelligence
+  photo: officials/jay-clayton.jpg
+  source: https://commons.wikimedia.org/wiki/File:Jay_Clayton_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: sean-duffy
+  name: Sean Duffy
+  position: U.S. Secretary of Transportation
+  photo: officials/sean-duffy.jpg
+  source: https://commons.wikimedia.org/wiki/File:Sean_Duffy_official_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: markwayne-mullin
+  name: Markwayne Mullin
+  position: U.S Secretary of Homeland Security
+  photo: officials/markwayne-mullin.jpg
+  source: https://commons.wikimedia.org/wiki/File:Markwayne_Mullin_117th_Congress_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: john-ratcliffe
+  name: John Ratcliffe
+  position: Director of the Central Intelligence Agency
+  photo: officials/john-ratcliffe.jpg
+  source: https://commons.wikimedia.org/wiki/File:John_Ratcliffe_official_CIA_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: gregory-bovino
+  name: Gregory Bovino
+  position: Former Commander-at-large, U.S. Customs and Border Protection
+  photo: officials/gregory-bovino.jpg
+  source: https://commons.wikimedia.org/wiki/File:Gregory_Bovino.jpg
+  license: Public domain (U.S. Government work)
+
+- id: mitch-mcconnell
+  name: Mitch McConnell
+  position: U.S. Senator from Kentucky
+  photo: officials/mitch-mcconnell.jpg
+  source: https://commons.wikimedia.org/wiki/File:Mitch_McConnell_2016_official_photo.jpg
+  license: Public domain (U.S. Government work)
+
+- id: susan-collins
+  name: Susan Collins
+  position: U.S. Senator from Maine
+  photo: officials/susan-collins.jpg
+  source: https://commons.wikimedia.org/wiki/File:Susan_Collins_official_Senate_photo.jpg
+  license: Public domain (U.S. Government work)
+
+- id: ken-paxton
+  name: Ken Paxton
+  position: Attorney General of Texas
+  photo: officials/ken-paxton.jpg
+  source: https://commons.wikimedia.org/wiki/File:Ken_Paxton_(cropped).jpg
+  license: See source
+
+- id: lisa-murkowski
+  name: Lisa Murkowski
+  position: U.S. Senator from Alaska
+  photo: officials/lisa-murkowski.jpg
+  source: https://commons.wikimedia.org/wiki/File:Lisa_Murkowski_official_photo_(cropped).jpg
+  license: Public domain (U.S. Government work)
+
+- id: mike-rogers
+  name: Mike Rogers
+  position: Republican nominee for U.S. Senate in Michigan
+  photo: officials/mike-rogers.jpg
+  source: https://commons.wikimedia.org/wiki/File:Mike_Rogers_official_photo.jpg
+  license: See source
+
+- id: ashley-moody
+  name: Ashley Moody
+  position: U.S. Senator from Florida
+  photo: officials/ashley-moody.jpg
+  source: https://commons.wikimedia.org/wiki/File:Ashley_Moody_official_Senate_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: jon-husted
+  name: Jon Husted
+  position: U.S. Senator from Ohio
+  photo: officials/jon-husted.jpg
+  source: https://commons.wikimedia.org/wiki/File:Jon_Husted_official_Senate_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: ashley-hinson
+  name: Ashley Hinson
+  position: Republican nominee for U.S. Senate in Iowa / U.S. Representative from Iowa
+  photo: officials/ashley-hinson.jpg
+  source: https://commons.wikimedia.org/wiki/File:Ashley_Hinson_official_portrait_117th_Congress.jpg
+  license: Public domain (U.S. Government work)
+
+- id: dan-sullivan
+  name: Dan Sullivan
+  position: U.S. Senator from Alaska
+  photo: officials/dan-sullivan.jpg
+  source: https://commons.wikimedia.org/wiki/File:Dan_Sullivan_official_Senate_photo.jpg
+  license: Public domain (U.S. Government work)
+
+- id: roger-marshall
+  name: Roger Marshall
+  position: U.S. Senator from Kansas
+  photo: officials/roger-marshall.jpg
+  source: https://commons.wikimedia.org/wiki/File:Roger_Marshall_117th_Congress_portrait.jpg
+  license: Public domain (U.S. Government work)
+
+- id: pete-ricketts
+  name: Pete Ricketts
+  position: U.S. Senator from Nebraska
+  photo: officials/pete-ricketts.jpg
+  source: https://commons.wikimedia.org/wiki/File:Pete_Ricketts_official_portrait.jpg
   license: Public domain (U.S. Government work)
