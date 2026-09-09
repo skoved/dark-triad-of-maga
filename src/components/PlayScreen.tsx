@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { Bary } from '../lib/barycentric';
 import type { Official } from '../data/officials';
 import type { PlacedOfficial } from '../hooks/useGameState';
@@ -20,6 +20,8 @@ export function PlayScreen({
   onPlace: (b: Bary) => void;
 }) {
   const [hoverBary, setHoverBary] = useState<Bary | null>(null);
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="flex min-h-dvh flex-col px-4 py-4">
@@ -31,7 +33,10 @@ export function PlayScreen({
 
       <div className="flex flex-1 items-center justify-center">
         <div className="grid w-full max-w-[1800px] grid-cols-1 items-center justify-items-center gap-6 lg:grid-cols-[minmax(16rem,1fr)_auto_minmax(16rem,1fr)]">
-          <div className="order-2 w-full max-w-[26rem] lg:order-1 lg:justify-self-end">
+          <div
+            ref={leftPanelRef}
+            className="order-2 w-full max-w-[26rem] lg:order-1 lg:justify-self-end"
+          >
             <PersonPrompt official={official} index={index} total={total} />
           </div>
 
@@ -40,6 +45,8 @@ export function PlayScreen({
               placed={placed}
               interactive
               showDefinitions
+              avoidLeftRef={leftPanelRef}
+              avoidRightRef={rightPanelRef}
               onHoverBary={setHoverBary}
               onPlace={(b) => {
                 onPlace(b);
@@ -48,7 +55,10 @@ export function PlayScreen({
             />
           </div>
 
-          <div className="order-3 w-full max-w-[26rem] lg:justify-self-start">
+          <div
+            ref={rightPanelRef}
+            className="order-3 w-full max-w-[26rem] lg:justify-self-start"
+          >
             <TraitReadout bary={hoverBary} />
           </div>
         </div>

@@ -53,11 +53,11 @@ describe('full play-through', () => {
 
     // first prompt visible + progress counter
     expect(screen.getByText(/1 \/ 21/)).toBeTruthy();
-    expect(document.querySelectorAll('svg path').length).toBe(0);
+    expect(document.querySelectorAll('[data-marker]').length).toBe(0);
 
     placeAt(0);
-    // one marker diamond now on the board
-    expect(document.querySelectorAll('svg path').length).toBe(1);
+    // one photo marker now on the board
+    expect(document.querySelectorAll('[data-marker]').length).toBe(1);
     expect(screen.getByText(/2 \/ 21/)).toBeTruthy();
     expect(localStorage.getItem('dtom:v1')).toBeTruthy();
 
@@ -90,6 +90,6 @@ describe('full play-through', () => {
 
     // straight back into the game at the same spot, markers restored
     expect(screen.getByText(/4 \/ 21/)).toBeTruthy();
-    expect(document.querySelectorAll('svg path').length).toBe(3);
+    expect(document.querySelectorAll('[data-marker]').length).toBe(3);
   });
 });

@@ -1,16 +1,20 @@
 import {
   forwardRef,
   useId,
+  useLayoutEffect,
+  useMemo,
   useRef,
   useState,
   type CSSProperties,
   type MouseEvent as ReactMouseEvent,
   type PointerEvent as ReactPointerEvent,
+  type RefObject,
 } from 'react';
 import {
   A,
   B,
   C,
+  CENTROID,
   TRIANGLE_POINTS,
   TRAIT_DEFINITION,
   fromBarycentric,
@@ -22,6 +26,7 @@ import {
 } from '../lib/barycentric';
 import { buildCallout } from '../lib/hockeyStick';
 import { CalloutCard } from './CalloutCard';
+import { photoUrl } from '../data/officials';
 import type { PlacedOfficial } from '../hooks/useGameState';
 
 // Hex literals (not CSS vars): SVG presentation attributes don't resolve var(),
@@ -46,8 +51,32 @@ type Props = {
   interactive?: boolean;
   showAllNames?: boolean;
   showDefinitions?: boolean;
+  /** Panels the hover callout must never cover; it dodges above/below them. */
+  avoidLeftRef?: RefObject<HTMLElement | null>;
+  avoidRightRef?: RefObject<HTMLElement | null>;
   onHoverBary?: (b: Bary | null) => void;
   onPlace?: (b: Bary) => void;
+};
+
+// Hover-callout card sizing (px) used for on-screen collision avoidance.
+const CARD_W = 272;
+const CARD_H = 132;
+const CARD_GAP = 12; // offset from the hockey-stick shaft end
+const PANEL_GAP = 12; // clearance kept when dodging a panel
+const EDGE_GAP = 8; // min gap from the viewport edge
+const BLADE_LEN = 8; // hockey-stick blade length off the marker (viewBox units)
+const MARKER_R = 2.5; // photo-marker radius (viewBox units)
+const MARKER_HIT_R = 4; // invisible hover/click target radius
+
+const unit = (x: number, y: number) => {
+  const len = Math.hypot(x, y) || 1e-9;
+  return { x: x / len, y: y / len };
+};
+
+type CalloutLayout = {
+  cardStyle: CSSProperties; // width / left / top for the card wrapper
+  linePoints: string; // hockey-stick polyline, viewBox units
+  endDot: { x: number; y: number }; // viewBox units
 };
 
 const GRID_STEPS = [0.2, 0.4, 0.6, 0.8];
@@ -73,6 +102,8 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
     interactive = false,
     showAllNames = false,
     showDefinitions = false,
+    avoidLeftRef,
+    avoidRightRef,
     onHoverBary,
     onPlace,
   },
@@ -131,19 +162,105 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
   }
 
   const hovered = placed.find((p) => p.official.id === hoveredId) ?? null;
-  const callout = hovered ? buildCallout(fromBarycentric(hovered.bary)) : null;
+  const callout = useMemo(
+    () => (hovered ? buildCallout(fromBarycentric(hovered.bary)) : null),
+    [hovered],
+  );
 
-  let cardStyle: CSSProperties | undefined;
-  if (callout) {
-    cardStyle = {
-      left: `${callout.end.x}%`,
-      top: `${callout.end.y}%`,
-      transform:
+  // Position the hover callout so it never covers the flanking panels: it keeps
+  // its natural spot out in the gutter unless that overlaps a panel, in which
+  // case it slides fully above or below (whichever it is nearer). The
+  // hockey-stick line is rebuilt to terminate at wherever the card ends up.
+  const [calloutLayout, setCalloutLayout] = useState<CalloutLayout | null>(null);
+
+  useLayoutEffect(() => {
+    const svg = svgRef.current;
+    if (!callout || !svg) {
+      setCalloutLayout(null);
+      return;
+    }
+
+    const resolve = () => {
+      const board = svg.getBoundingClientRect();
+      if (!board.width || !board.height) return;
+      const toVb = (px: number) => (px / board.width) * 100;
+
+      const anchorX =
+        callout.side === 'right' ? CARD_GAP : -(CARD_W + CARD_GAP);
+      let leftVp = board.left + (callout.end.x / 100) * board.width + anchorX;
+      leftVp = Math.max(
+        EDGE_GAP,
+        Math.min(leftVp, window.innerWidth - CARD_W - EDGE_GAP),
+      );
+
+      const centerYVp = board.top + (callout.end.y / 100) * board.height;
+      let topVp = centerYVp - CARD_H / 2;
+
+      const panel =
         callout.side === 'right'
-          ? 'translate(8px, -50%)'
-          : 'translate(calc(-100% - 8px), -50%)',
+          ? avoidRightRef?.current
+          : avoidLeftRef?.current;
+      if (panel) {
+        const p = panel.getBoundingClientRect();
+        const hitX = leftVp < p.right && leftVp + CARD_W > p.left;
+        const hitY = topVp < p.bottom && topVp + CARD_H > p.top;
+        if (hitX && hitY) {
+          const upTop = p.top - PANEL_GAP - CARD_H;
+          const downTop = p.bottom + PANEL_GAP;
+          const preferUp = centerYVp < (p.top + p.bottom) / 2;
+          if (preferUp) {
+            topVp = upTop >= EDGE_GAP ? upTop : downTop;
+          } else {
+            topVp =
+              downTop + CARD_H <= window.innerHeight - EDGE_GAP
+                ? downTop
+                : upTop;
+          }
+        }
+      }
+
+      topVp = Math.max(
+        EDGE_GAP,
+        Math.min(topVp, window.innerHeight - CARD_H - EDGE_GAP),
+      );
+
+      const cardLeft = leftVp - board.left;
+      const cardTop = topVp - board.top;
+
+      // Attach the line to the card edge facing the triangle, at its mid-height.
+      const attachXpx =
+        callout.side === 'right' ? cardLeft : cardLeft + CARD_W;
+      const ax = toVb(attachXpx);
+      const ay = toVb(cardTop + CARD_H / 2);
+      const { marker } = callout;
+
+      // One-bend hockey stick: a short blade off the marker, then a single
+      // straight shaft to the card. Blade direction = average of "straight out
+      // from the triangle centre" and "straight at the card", so the bend stays
+      // gentle wherever the card ends up (never a right angle).
+      const toCard = unit(ax - marker.x, ay - marker.y);
+      const outward = unit(marker.x - CENTROID.x, marker.y - CENTROID.y);
+      const sum = { x: outward.x + toCard.x, y: outward.y + toCard.y };
+      const blade =
+        Math.hypot(sum.x, sum.y) < 1e-3 ? toCard : unit(sum.x, sum.y);
+      const ex = marker.x + blade.x * BLADE_LEN;
+      const ey = marker.y + blade.y * BLADE_LEN;
+
+      setCalloutLayout({
+        cardStyle: { width: CARD_W, left: cardLeft, top: cardTop },
+        linePoints: `${marker.x},${marker.y} ${ex},${ey} ${ax},${ay}`,
+        endDot: { x: ax, y: ay },
+      });
     };
-  }
+
+    resolve();
+    window.addEventListener('resize', resolve);
+    window.addEventListener('scroll', resolve, { capture: true, passive: true });
+    return () => {
+      window.removeEventListener('resize', resolve);
+      window.removeEventListener('scroll', resolve, { capture: true });
+    };
+  }, [hoveredId, callout, avoidLeftRef, avoidRightRef]);
 
   const ghostBary = pending ?? ghost;
   const ghostPt = interactive && ghostBary ? fromBarycentric(ghostBary) : null;
@@ -169,6 +286,9 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
           </linearGradient>
           <clipPath id={`sign-clip-${gradId}`}>
             <polygon points={TRIANGLE_POINTS} />
+          </clipPath>
+          <clipPath id={`marker-clip-${gradId}`}>
+            <circle r={MARKER_R} />
           </clipPath>
           <filter id={`glow-${gradId}`} x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="1.1" result="b" />
@@ -204,29 +324,36 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
           filter={`url(#glow-${gradId})`}
         />
 
-        {/* placed markers */}
+        {/* placed markers — small desaturated photo of the person */}
         {placed.map((p) => {
           const pt = fromBarycentric(p.bary);
+          const isNewest = interactive && p.order === placed.length;
           return (
-            <g key={p.official.id}>
-              <circle cx={pt.x} cy={pt.y} r={2.6} fill={COLOR.bloodFaint} />
-              <path
-                d={`M${pt.x} ${pt.y - 1.6} L${pt.x + 1.6} ${pt.y} L${pt.x} ${
-                  pt.y + 1.6
-                } L${pt.x - 1.6} ${pt.y} Z`}
-                fill={COLOR.blood}
-                stroke={COLOR.boneFaint}
-                strokeWidth={0.3}
-                className={
-                  interactive && p.order === placed.length
-                    ? 'dtom-pulse'
-                    : undefined
-                }
-              />
+            <g key={p.official.id} data-marker={p.official.id}>
+              <g transform={`translate(${pt.x} ${pt.y})`} pointerEvents="none">
+                <circle r={MARKER_R + 0.7} fill={COLOR.bloodFaint} />
+                <image
+                  href={photoUrl(p.official.photo)}
+                  x={-MARKER_R}
+                  y={-MARKER_R}
+                  width={MARKER_R * 2}
+                  height={MARKER_R * 2}
+                  preserveAspectRatio="xMidYMin slice"
+                  clipPath={`url(#marker-clip-${gradId})`}
+                  style={{ filter: 'saturate(0.55)' }}
+                />
+                <circle
+                  r={MARKER_R}
+                  fill="none"
+                  stroke={isNewest ? COLOR.blood : COLOR.boneFaint}
+                  strokeWidth={isNewest ? 0.7 : 0.45}
+                  className={isNewest ? 'dtom-pulse' : undefined}
+                />
+              </g>
               {showAllNames && (
                 <text
                   x={pt.x}
-                  y={pt.y - 3}
+                  y={pt.y - MARKER_R - 1.6}
                   textAnchor="middle"
                   fontSize={2.3}
                   fontFamily="Inter, system-ui, sans-serif"
@@ -241,7 +368,7 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
               <circle
                 cx={pt.x}
                 cy={pt.y}
-                r={4}
+                r={MARKER_HIT_R}
                 fill="transparent"
                 style={{ cursor: 'pointer' }}
                 onPointerEnter={() => setHoveredId(p.official.id)}
@@ -260,10 +387,11 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
         })}
 
         {/* hockey-stick callout */}
-        {callout && (
+        {callout && calloutLayout && (
           <g pointerEvents="none">
             <polyline
-              points={callout.points}
+              points={calloutLayout.linePoints}
+              pathLength={1}
               fill="none"
               stroke={COLOR.blood}
               strokeWidth={0.6}
@@ -272,7 +400,12 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
               className="dtom-draw"
             />
             <circle cx={callout.marker.x} cy={callout.marker.y} r={0.9} fill={COLOR.blood} />
-            <circle cx={callout.end.x} cy={callout.end.y} r={0.9} fill={COLOR.blood} />
+            <circle
+              cx={calloutLayout.endDot.x}
+              cy={calloutLayout.endDot.y}
+              r={0.9}
+              fill={COLOR.blood}
+            />
           </g>
         )}
 
@@ -305,8 +438,11 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
         </CornerLabel>
       </svg>
 
-      {hovered && cardStyle && (
-        <div className="pointer-events-none absolute z-20" style={cardStyle}>
+      {hovered && calloutLayout && (
+        <div
+          className="pointer-events-none absolute z-20"
+          style={calloutLayout.cardStyle}
+        >
           <CalloutCard official={hovered.official} />
         </div>
       )}

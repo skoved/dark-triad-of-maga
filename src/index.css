@@ -95,8 +95,8 @@
 
 @layer components {
   .dtom-draw {
-    stroke-dasharray: 60;
-    stroke-dashoffset: 60;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
     animation: dtom-draw 0.28s ease-out forwards;
   }
   @keyframes dtom-draw {
