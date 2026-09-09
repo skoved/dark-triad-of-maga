@@ -18,13 +18,13 @@ export function PersonPrompt({
         </span>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         <img
           src={photoUrl(official.photo)}
           alt={official.name}
           className="h-20 w-20 shrink-0 rounded-md border border-white/10 object-cover object-top grayscale-[35%] sm:h-24 sm:w-24"
         />
-        <div className="min-w-0">
+        <div className="min-w-[12rem] flex-1">
           <div className="font-display text-lg leading-tight text-bone break-words">
             {official.name}
           </div>
