@@ -23,6 +23,9 @@
   --color-narc: #a78bfa;
   --color-mach: #86b787;
   --color-psych: #ef6b6b;
+
+  /* call-to-action green (Digital Ground Game canvass badge) */
+  --color-canvass: #5fd0a0;
 }
 
 @layer base {

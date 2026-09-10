@@ -4,6 +4,14 @@
 # resolved against /public (so "officials/foo.jpg" -> public/officials/foo.jpg).
 # `source` / `license` are for attribution only and are not shown in-game.
 #
+# Optional per entry: if Digital Ground Game is canvassing for this official's
+# opponent, add a `dggCanvass:` block. Its presence renders a megaphone + the
+# event name on the "Place this person" box (as a link to `signupUrl`) and on the
+# hover callout (plain text). Example:
+#   dggCanvass:
+#     eventName: Canvass to defeat Someone
+#     signupUrl: https://www.mobilize.us/...
+#
 # Portraits here are official U.S. government portraits, which are in the public
 # domain as works of the federal government. See ATTRIBUTIONS.md.
 
@@ -107,14 +115,14 @@
 
 - id: mike-johnson
   name: Mike Johnson
-  position: Speaker of the U.S. House of Representatives
+  position: Speaker of the U.S. House of Representatives / U.S. Representative from Louisiana's 4th Congressional District
   photo: officials/mike-johnson.jpg
   source: https://commons.wikimedia.org/wiki/File:Mike_Johnson_117th_Congress_portrait.jpg
   license: Public domain (U.S. Government work)
 
 - id: john-thune
   name: John Thune
-  position: U.S. Senate Majority Leader
+  position: U.S. Senate Majority Leader / U.S. Senator from South Dakota
   photo: officials/john-thune.jpg
   source: https://commons.wikimedia.org/wiki/File:John_Thune_official_Senate_portrait.jpg
   license: Public domain (U.S. Government work)
@@ -177,10 +185,13 @@
 
 - id: ken-paxton
   name: Ken Paxton
-  position: Attorney General of Texas
+  position: Republican nominee for U.S Senate in Texas / Attorney General of Texas
   photo: officials/ken-paxton.jpg
   source: https://commons.wikimedia.org/wiki/File:Ken_Paxton_(cropped).jpg
   license: See source
+  dggCanvass:
+    eventName: San Antonio Event (Oct 31 - Nov 1)
+    signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSdBMzav2SlHJp-W8k0aseZwr7HThgZva1c8f-0wRAeGn2vmeQ/viewform?usp=header
 
 - id: mike-rogers
   name: Mike Rogers
@@ -188,6 +199,9 @@
   photo: officials/mike-rogers.jpg
   source: https://commons.wikimedia.org/wiki/File:Mike_Rogers_official_photo.jpg
   license: See source
+  dggCanvass:
+    eventName: Detroit Event (Oct 17 - 18)
+    signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSdfpfBZiqDMYywQA7Xeuw7MPyZxoq1chQJcwnznCc3XOOF-Kg/viewform?usp=header
 
 - id: jon-husted
   name: Jon Husted
@@ -195,6 +209,9 @@
   photo: officials/jon-husted.jpg
   source: https://commons.wikimedia.org/wiki/File:Jon_Husted_official_Senate_portrait.jpg
   license: Public domain (U.S. Government work)
+  dggCanvass:
+    eventName: Cleveland Event (Sept 26 - 27)
+    signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSdWPJAzcAX409vFyyF67snfgwOQFjyEsHTFoXm0Dty3vqTESw/viewform?usp=header
 
 - id: dan-sullivan
   name: Dan Sullivan
@@ -212,14 +229,14 @@
 
 - id: marjorie-taylor-greene
   name: Marjorie Taylor Greene
-  position: Former U.S. Representative from Georgia
+  position: Former U.S. Representative from Georgia's 14th Congressional District
   photo: officials/marjorie-taylor-greene.jpg
   source: https://commons.wikimedia.org/wiki/File:Marjorie_Taylor_Greene_117th_Congress_portrait.jpg
   license: Public domain (U.S. Government work)
 
 - id: george-santos
   name: George Santos
-  position: Former U.S. Representative from New York
+  position: Former U.S. Representative from New York's 3rd Congressional District
   photo: officials/george-santos.jpg
   source: https://commons.wikimedia.org/wiki/File:George_Santos_117th_Congress_portrait.jpg
   license: Public domain (U.S. Government work)
@@ -254,7 +271,7 @@
 
 - id: brandon-herrera
   name: Brandon Herrera
-  position: Republican nominee for U.S. House in Texas
+  position: Republican nominee for U.S. House in Texas' 23rd Congressional District
   photo: officials/brandon-herrera.jpg
   source: https://commons.wikimedia.org/wiki/File:Brandon_Herrera.jpg
   license: See source
@@ -268,14 +285,17 @@
 
 - id: thomas-massie
   name: Thomas Massie
-  position: U.S. Representative from Kentucky
+  position: U.S. Representative from Kentucky's 4th
   photo: officials/thomas-massie.jpg
   source: https://commons.wikimedia.org/wiki/File:Thomas_Massie_official_portrait_117th_Congress.jpg
   license: Public domain (U.S. Government work)
 
 - id: andy-biggs
   name: Andy Biggs
-  position: U.S. Representative from Arizona
+  position: Republican nominee for Governor of Arizona / U.S. Representative from Arizona's 5th Congressional District
   photo: officials/andy-biggs.jpg
   source: https://commons.wikimedia.org/wiki/File:Andy_Biggs_117th_Congress_portrait.jpg
   license: Public domain (U.S. Government work)
+  dggCanvass:
+    eventName: Phoenix Event (Oct 3 - 4)
+    signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSckJw5Zp7PEcry3x7kWefu2JIF8ouxLBUt91-mpGdUC5CTxEw/viewform?usp=header

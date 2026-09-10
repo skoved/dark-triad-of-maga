@@ -27,7 +27,7 @@ afterEach(() => {
 });
 
 function getBoard() {
-  const svg = document.querySelector('svg');
+  const svg = document.querySelector('svg[data-board]');
   if (!svg) throw new Error('board not rendered');
   return svg;
 }

@@ -171,7 +171,14 @@ Entry schema:
   photo: officials/jd-vance.jpg # resolved under /public
   source: https://commons.wikimedia.org/wiki/File:...   # optional, attribution only
   license: Public domain (U.S. Government work)          # optional, not shown in-game
+  dggCanvass:                    # optional; presence renders the canvass badge
+    eventName: Canvass to defeat ...
+    signupUrl: https://www.mobilize.us/...   # validated as a URL
 ```
+
+`dggCanvass` (validated by `DggCanvassSchema` in `officials.ts`) renders a
+megaphone + `eventName` via `components/CanvassBadge.tsx` — a signup **link** on
+`PersonPrompt`, plain text on `CalloutCard` (the callout is `pointer-events-none`).
 
 Portraits go in `public/officials/<id>.jpg`. `scripts/fetch-portraits.mjs` reads
 the YAML and downloads any missing portrait — English-Wikipedia lead image by

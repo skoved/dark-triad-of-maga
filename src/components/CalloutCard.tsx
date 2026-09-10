@@ -1,4 +1,5 @@
 import { photoUrl, type Official } from '../data/officials';
+import { CanvassBadge } from './CanvassBadge';
 
 export function CalloutCard({ official }: { official: Official }) {
   return (
@@ -16,6 +17,7 @@ export function CalloutCard({ official }: { official: Official }) {
         <div className="mt-0.5 text-xs leading-snug text-ash">
           {official.position}
         </div>
+        {official.dggCanvass && <CanvassBadge canvass={official.dggCanvass} />}
       </div>
     </div>
   );

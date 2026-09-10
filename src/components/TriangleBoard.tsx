@@ -266,6 +266,7 @@ export const TriangleBoard = forwardRef<HTMLDivElement, Props>(function Triangle
     <div ref={ref} className="relative aspect-square w-full select-none">
       <svg
         ref={svgRef}
+        data-board=""
         viewBox="0 0 100 100"
         className="absolute inset-0 h-full w-full overflow-visible"
         style={{ touchAction: 'none', cursor: interactive ? 'crosshair' : 'default' }}

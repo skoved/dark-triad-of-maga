@@ -1,6 +1,15 @@
 import { z } from 'zod';
 import roster from './officials.yaml';
 
+/**
+ * Optional: Digital Ground Game is canvassing for this official's opponent.
+ * Presence of the block means "yes"; both sub-fields are required when present.
+ */
+const DggCanvassSchema = z.object({
+  eventName: z.string().min(1),
+  signupUrl: z.string().url(),
+});
+
 const OfficialSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
@@ -8,6 +17,7 @@ const OfficialSchema = z.object({
   photo: z.string().min(1),
   source: z.string().optional(),
   license: z.string().optional(),
+  dggCanvass: DggCanvassSchema.optional(),
 });
 
 export type Official = z.infer<typeof OfficialSchema>;

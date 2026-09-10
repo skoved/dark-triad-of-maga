@@ -1,4 +1,5 @@
 import { photoUrl, type Official } from '../data/officials';
+import { CanvassBadge } from './CanvassBadge';
 
 export function PersonPrompt({
   official,
@@ -31,6 +32,9 @@ export function PersonPrompt({
           <div className="mt-1 break-words text-sm leading-snug text-ash">
             {official.position}
           </div>
+          {official.dggCanvass && (
+            <CanvassBadge canvass={official.dggCanvass} linked />
+          )}
         </div>
       </div>
 
