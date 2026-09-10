@@ -21,12 +21,12 @@ export function TraitReadout({
         locked ? 'ring-glow' : ''
       }`}
     >
-      <div className="mb-3 flex items-baseline justify-between">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ash">
+      <div className="mb-3 flex items-baseline justify-between gap-2">
+        <span className="min-w-0 truncate text-xs font-semibold uppercase tracking-[0.2em] text-ash">
           Trait mix
         </span>
-        <span className="text-xs uppercase tracking-widest text-faint">
-          {locked ? 'locked' : bary ? 'at cursor' : 'hover the triangle'}
+        <span className="min-w-[4.5rem] shrink-0 text-right text-xs uppercase tracking-widest text-faint">
+          {locked ? 'locked' : bary ? 'at cursor' : ''}
         </span>
       </div>
 
@@ -35,9 +35,11 @@ export function TraitReadout({
           const value = pct ? pct[row.key] : 0;
           return (
             <div key={row.key}>
-              <div className="mb-1 flex items-center justify-between text-sm">
-                <span className={`font-medium ${row.color}`}>{row.label}</span>
-                <span className="tabular-nums text-bone">
+              <div className="mb-1 flex items-center justify-between gap-2 text-sm">
+                <span className={`min-w-0 truncate font-medium ${row.color}`}>
+                  {row.label}
+                </span>
+                <span className="w-12 shrink-0 text-right tabular-nums text-bone">
                   {pct ? `${value}%` : '—'}
                 </span>
               </div>
