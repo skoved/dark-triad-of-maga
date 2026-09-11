@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { TRAIT_DEFINITION, type Bary } from '../lib/barycentric';
 import type { Official } from '../data/officials';
 import type { PlacedOfficial } from '../hooks/useGameState';
+import { Chiron } from './Chiron';
 import { PersonPrompt } from './PersonPrompt';
 import { TraitReadout } from './TraitReadout';
 import { TriangleBoard } from './TriangleBoard';
@@ -26,7 +27,9 @@ export function PlayScreen({
   const defClass = 'text-center text-sm leading-snug text-faint';
 
   return (
-    <div className="flex min-h-dvh flex-col px-4 py-3 xl:h-dvh xl:overflow-hidden">
+    <div className="flex min-h-dvh flex-col px-4 pb-3 pt-12 xl:h-dvh xl:overflow-hidden">
+      <Chiron />
+
       <header className="mx-auto w-full max-w-[1800px] shrink-0">
         <span className="font-display text-base uppercase tracking-[0.2em] text-ash">
           The Dark Triad of MAGA
@@ -42,7 +45,7 @@ export function PlayScreen({
         </div>
 
         {/* board with each trait's definition glued to the matching edge */}
-        <div className="order-1 flex shrink-0 flex-col items-center gap-1.5 xl:order-2 xl:w-[min(44vw,calc(100dvh-15rem))]">
+        <div className="order-1 flex shrink-0 flex-col items-center gap-1.5 xl:order-2 xl:w-[min(44vw,calc(100dvh-17.25rem))]">
           <p className={defClass}>{TRAIT_DEFINITION.n}</p>
 
           <div className="aspect-square w-[min(90vw,58dvh)] xl:w-full">
