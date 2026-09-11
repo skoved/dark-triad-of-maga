@@ -190,7 +190,7 @@
   source: https://commons.wikimedia.org/wiki/File:Ken_Paxton_(cropped).jpg
   license: See source
   dggCanvass:
-    eventName: San Antonio Event (Oct 31 - Nov 1)
+    eventName: San Antonio Event
     signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSdBMzav2SlHJp-W8k0aseZwr7HThgZva1c8f-0wRAeGn2vmeQ/viewform?usp=header
 
 - id: mike-rogers
@@ -200,7 +200,7 @@
   source: https://commons.wikimedia.org/wiki/File:Mike_Rogers_official_photo.jpg
   license: See source
   dggCanvass:
-    eventName: Detroit Event (Oct 17 - 18)
+    eventName: Detroit Event
     signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSdfpfBZiqDMYywQA7Xeuw7MPyZxoq1chQJcwnznCc3XOOF-Kg/viewform?usp=header
 
 - id: jon-husted
@@ -210,7 +210,7 @@
   source: https://commons.wikimedia.org/wiki/File:Jon_Husted_official_Senate_portrait.jpg
   license: Public domain (U.S. Government work)
   dggCanvass:
-    eventName: Cleveland Event (Sept 26 - 27)
+    eventName: Cleveland Event
     signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSdWPJAzcAX409vFyyF67snfgwOQFjyEsHTFoXm0Dty3vqTESw/viewform?usp=header
 
 - id: dan-sullivan
@@ -297,5 +297,5 @@
   source: https://commons.wikimedia.org/wiki/File:Andy_Biggs_117th_Congress_portrait.jpg
   license: Public domain (U.S. Government work)
   dggCanvass:
-    eventName: Phoenix Event (Oct 3 - 4)
+    eventName: Phoenix Event
     signupUrl: https://docs.google.com/forms/d/e/1FAIpQLSckJw5Zp7PEcry3x7kWefu2JIF8ouxLBUt91-mpGdUC5CTxEw/viewform?usp=header
